@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "./config";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function Login() {
         }
 
         // ✅ API call
-        fetch("http://localhost:8080/auth/login", {
+        fetch(`${API_BASE_URL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

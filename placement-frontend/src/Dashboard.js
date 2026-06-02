@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "./config";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -18,16 +19,19 @@ function Dashboard() {
         const fetchDashboardData = async () => {
             try {
                 // 1. Fetch Companies
-                const compRes = await fetch("http://localhost:8080/companies");
+                const compRes = await fetch(`${API_BASE_URL}/companies`);
+
                 const compData = await compRes.json();
                 setCompanies(compData);
 
                 // 2. Fetch Placements & Stats
-                const statsRes = await fetch("http://localhost:8080/statistics");
+                const statsRes = await fetch(`${API_BASE_URL}/statistics`);
+
                 const statsData = await statsRes.json();
 
                 // 3. Fetch Notifications
-                const noteRes = await fetch("http://localhost:8080/notifications");
+                const noteRes = await fetch(`${API_BASE_URL}/notifications`);
+
                 const noteData = await noteRes.json();
                 setNotifications(noteData.slice(0, 4)); // Show top 4
 

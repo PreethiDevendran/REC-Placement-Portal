@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { API_BASE_URL } from "./config";
 
 function AIChatbot({ onClose }) {
     const [messages, setMessages] = useState([
@@ -40,7 +41,8 @@ function AIChatbot({ onClose }) {
 
         try {
             // Query Chatbot Backend API
-            const res = await fetch("http://localhost:8080/chatbot/ask", {
+            const res = await fetch(`${API_BASE_URL}/chatbot/ask`, {
+
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: messageText })

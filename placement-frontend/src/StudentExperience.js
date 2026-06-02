@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "./config";
 
 function StudentExperience() {
     const userEmail = localStorage.getItem("email") || "";
@@ -25,7 +26,8 @@ function StudentExperience() {
     // Load discussions from DB
     const loadQuestions = () => {
         setLoading(true);
-        fetch("http://localhost:8080/questions")
+        fetch(`${API_BASE_URL}/questions`)
+
             .then(res => res.json())
             .then(data => {
                 setQuestions(data);
@@ -56,7 +58,8 @@ function StudentExperience() {
             replies: []
         };
 
-        fetch("http://localhost:8080/questions", {
+        fetch(`${API_BASE_URL}/questions`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(questionPayload)
@@ -73,7 +76,8 @@ function StudentExperience() {
     const handleQuestionUpvote = (id) => {
         if (!userEmail) return;
 
-        fetch(`http://localhost:8080/questions/${id}/upvote`, {
+        fetch(`${API_BASE_URL}/questions/${id}/upvote`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userEmail)
@@ -98,7 +102,8 @@ function StudentExperience() {
             upvotes: []
         };
 
-        fetch(`http://localhost:8080/questions/${questionId}/answer`, {
+        fetch(`${API_BASE_URL}/questions/${questionId}/answer`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(replyPayload)
@@ -114,7 +119,8 @@ function StudentExperience() {
     const handleReplyUpvote = (questionId, replyIndex) => {
         if (!userEmail) return;
 
-        fetch(`http://localhost:8080/questions/${questionId}/answer/${replyIndex}/upvote`, {
+        fetch(`${API_BASE_URL}/questions/${questionId}/answer/${replyIndex}/upvote`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userEmail)

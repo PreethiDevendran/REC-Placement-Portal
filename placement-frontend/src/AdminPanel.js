@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "./config";
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState("companies");
@@ -25,24 +26,25 @@ function AdminPanel() {
         setLoading(true);
         try {
             if (activeTab === "companies") {
-                const res = await fetch("http://localhost:8080/companies");
+                const res = await fetch(`${API_BASE_URL}/companies`);
                 setCompanies(await res.json());
             } else if (activeTab === "statistics") {
-                const res = await fetch("http://localhost:8080/statistics");
+                const res = await fetch(`${API_BASE_URL}/statistics`);
                 setStatistics(await res.json());
             } else if (activeTab === "experiences") {
-                const res = await fetch("http://localhost:8080/experiences");
+                const res = await fetch(`${API_BASE_URL}/experiences`);
                 setExperiences(await res.json());
             } else if (activeTab === "users") {
-                const res = await fetch("http://localhost:8080/users");
+                const res = await fetch(`${API_BASE_URL}/users`);
                 setUsers(await res.json());
             } else if (activeTab === "questions") {
-                const res = await fetch("http://localhost:8080/questions");
+                const res = await fetch(`${API_BASE_URL}/questions`);
                 setQuestions(await res.json());
             } else if (activeTab === "notifications") {
-                const res = await fetch("http://localhost:8080/notifications");
+                const res = await fetch(`${API_BASE_URL}/notifications`);
                 setNotifications(await res.json());
             }
+
         } catch (err) {
             console.error("Failed to load admin tab data:", err);
         } finally {
@@ -75,8 +77,9 @@ function AdminPanel() {
     const handleCompanySubmit = (e) => {
         e.preventDefault();
         const url = companyForm.id 
-            ? `http://localhost:8080/companies/${companyForm.id}` 
-            : "http://localhost:8080/companies";
+            ? `${API_BASE_URL}/companies/${companyForm.id}` 
+            : `${API_BASE_URL}/companies`;
+
         const method = companyForm.id ? "PUT" : "POST";
 
         fetch(url, {
@@ -99,7 +102,8 @@ function AdminPanel() {
 
     const handleCompanyDelete = (id) => {
         if (!window.confirm("Are you sure you want to delete this company?")) return;
-        fetch(`http://localhost:8080/companies/${id}`, { method: "DELETE" })
+        fetch(`${API_BASE_URL}/companies/${id}`, { method: "DELETE" })
+
         .then(() => {
             loadTabDetails();
             showMsg("🗑️ Company deleted.");
@@ -110,8 +114,9 @@ function AdminPanel() {
     const handleStatsSubmit = (e) => {
         e.preventDefault();
         const url = statsForm.id 
-            ? `http://localhost:8080/statistics/${statsForm.id}` 
-            : "http://localhost:8080/statistics";
+            ? `${API_BASE_URL}/statistics/${statsForm.id}` 
+            : `${API_BASE_URL}/statistics`;
+
         const method = statsForm.id ? "PUT" : "POST";
 
         fetch(url, {
@@ -134,7 +139,8 @@ function AdminPanel() {
 
     const handleStatsDelete = (id) => {
         if (!window.confirm("Are you sure?")) return;
-        fetch(`http://localhost:8080/statistics/${id}`, { method: "DELETE" })
+        fetch(`${API_BASE_URL}/statistics/${id}`, { method: "DELETE" })
+
         .then(() => {
             loadTabDetails();
             showMsg("🗑️ Stats deleted.");
@@ -144,7 +150,8 @@ function AdminPanel() {
     // --- ANNOUNCEMENTS (NOTIFICATIONS) ---
     const handleAnnouncementSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:8080/notifications", {
+        fetch(`${API_BASE_URL}/notifications`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(announcementForm)
@@ -158,7 +165,8 @@ function AdminPanel() {
     };
 
     const handleNotificationDelete = (id) => {
-        fetch(`http://localhost:8080/notifications/${id}`, { method: "DELETE" })
+        fetch(`${API_BASE_URL}/notifications/${id}`, { method: "DELETE" })
+
         .then(() => {
             loadTabDetails();
             showMsg("🗑️ Announcement removed.");
@@ -168,7 +176,8 @@ function AdminPanel() {
     // --- MODERATE EXPERIENCES ---
     const handleDeleteExperience = (id) => {
         if (!window.confirm("Delete this student review?")) return;
-        fetch(`http://localhost:8080/experiences/${id}`, { method: "DELETE" })
+        fetch(`${API_BASE_URL}/experiences/${id}`, { method: "DELETE" })
+
         .then(() => {
             loadTabDetails();
             showMsg("🗑️ Review deleted.");
@@ -178,7 +187,8 @@ function AdminPanel() {
     // --- MODERATE DISCUSSIONS ---
     const handleDeleteQuestion = (id) => {
         if (!window.confirm("Delete this discussion thread?")) return;
-        fetch(`http://localhost:8080/questions/${id}`, { method: "DELETE" })
+        fetch(`${API_BASE_URL}/questions/${id}`, { method: "DELETE" })
+
         .then(() => {
             loadTabDetails();
             showMsg("🗑️ Forum post deleted.");
@@ -187,7 +197,8 @@ function AdminPanel() {
 
     // --- MANAGE USER ROLES ---
     const handleUpgradeRole = (email, newRole) => {
-        fetch(`http://localhost:8080/users/${email}/role`, {
+        fetch(`${API_BASE_URL}/users/${email}/role`, {
+
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newRole)

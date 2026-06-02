@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "./config";
 
 function ExperienceHub() {
     const userEmail = localStorage.getItem("email") || "";
@@ -31,7 +32,8 @@ function ExperienceHub() {
     // Load experiences and companies lists
     const loadExperiences = () => {
         setLoading(true);
-        fetch("http://localhost:8080/experiences")
+        fetch(`${API_BASE_URL}/experiences`)
+
             .then(res => res.json())
             .then(data => {
                 setExperiences(data);
@@ -47,7 +49,8 @@ function ExperienceHub() {
         loadExperiences();
 
         // Load companies for dropdowns
-        fetch("http://localhost:8080/companies")
+        fetch(`${API_BASE_URL}/companies`)
+
             .then(res => res.json())
             .then(data => setCompanies(data))
             .catch(err => console.error("Failed to load companies:", err));
@@ -70,7 +73,8 @@ function ExperienceHub() {
     const handleLike = (id) => {
         if (!userEmail) return;
         
-        fetch(`http://localhost:8080/experiences/${id}/like`, {
+        fetch(`${API_BASE_URL}/experiences/${id}/like`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userEmail)
@@ -97,7 +101,8 @@ function ExperienceHub() {
             return;
         }
 
-        fetch("http://localhost:8080/experiences", {
+        fetch(`${API_BASE_URL}/experiences`, {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newExp)

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "./config";
 
 function PlacementStats() {
     const [experiences, setExperiences] = useState([]);
@@ -15,9 +16,10 @@ function PlacementStats() {
 
     useEffect(() => {
         Promise.all([
-            fetch("http://localhost:8080/statistics").then(res => res.json()),
-            fetch("http://localhost:8080/experiences").then(res => res.json()),
-            fetch("http://localhost:8080/companies").then(res => res.json())
+            fetch(`${API_BASE_URL}/statistics`).then(res => res.json()),
+            fetch(`${API_BASE_URL}/experiences`).then(res => res.json()),
+            fetch(`${API_BASE_URL}/companies`).then(res => res.json())
+
         ])
         .then(([statsData, expData, compData]) => {
             setExperiences(expData);

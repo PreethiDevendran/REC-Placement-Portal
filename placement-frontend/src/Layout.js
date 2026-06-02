@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import AIChatbot from "./AIChatbot";
+import { API_BASE_URL } from "./config";
 
 function Layout() {
     const navigate = useNavigate();
@@ -32,7 +33,8 @@ function Layout() {
         
         const email = localStorage.getItem("email");
         if (email) {
-            fetch(`http://localhost:8080/users/${email}/role`, {
+            fetch(`${API_BASE_URL}/users/${email}/role`, {
+
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(nextRole)

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "./config";
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ function Register() {
         }
 
         // ✅ API call
-        fetch("http://localhost:8080/auth/register", {
+        fetch(`${API_BASE_URL}/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "./config";
 
 function Profile() {
     const userEmail = localStorage.getItem("email") || "student@rajalakshmi.edu.in";
@@ -30,7 +31,8 @@ function Profile() {
 
     // Load Profile from DB on mount
     useEffect(() => {
-        fetch(`http://localhost:8080/users/${userEmail}`)
+        fetch(`${API_BASE_URL}/users/${userEmail}`)
+
             .then(res => {
                 if (!res.ok) throw new Error("Profile not found");
                 return res.json();
@@ -144,7 +146,8 @@ function Profile() {
     // Save changes to DB
     const handleSave = () => {
         setLoading(true);
-        fetch(`http://localhost:8080/users/${userEmail}`, {
+        fetch(`${API_BASE_URL}/users/${userEmail}`, {
+
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

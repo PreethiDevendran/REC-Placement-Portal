@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "./config";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
@@ -25,7 +26,8 @@ function CompanyUI() {
         const loadInitialData = async () => {
             try {
                 // Fetch companies
-                const compRes = await fetch("http://localhost:8080/companies");
+                const compRes = await fetch(`${API_BASE_URL}/companies`);
+
                 const compData = await compRes.json();
                 setCompanies(compData);
                 if (compData.length > 0) {
@@ -35,7 +37,8 @@ function CompanyUI() {
                 }
 
                 // Fetch statistics table for summary box
-                const statsRes = await fetch("http://localhost:8080/statistics");
+                const statsRes = await fetch(`${API_BASE_URL}/statistics`);
+
                 const statsData = await statsRes.json();
 
                 if (statsData.length > 0) {
@@ -75,12 +78,14 @@ function CompanyUI() {
     const fetchPlacedCount = async (companyName) => {
         try {
             // Count placements from experiences or stats
-            const res = await fetch(`http://localhost:8080/experiences/${companyName}`);
+            const res = await fetch(`${API_BASE_URL}/experiences/${companyName}`);
+
             const data = await res.json();
             
             // Fallback: search statistics if no experiences are found
             if (data.length === 0) {
-                const statsRes = await fetch("http://localhost:8080/statistics");
+                const statsRes = await fetch(`${API_BASE_URL}/statistics`);
+
                 const statsData = await statsRes.json();
                 const matchedStat = statsData.find(s => s.companyName.toLowerCase() === companyName.toLowerCase());
                 if (matchedStat) {
