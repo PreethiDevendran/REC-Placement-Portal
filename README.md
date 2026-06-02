@@ -165,7 +165,7 @@ This project addresses these challenges by providing a transparent and centraliz
 
 **Preethi D**
 
-Department of Computer Science and Engineering
+Department of Information Technology
 
 Rajalakshmi Engineering College
 
