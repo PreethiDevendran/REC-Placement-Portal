@@ -33,6 +33,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body("User already exists");
         }
 
+        if (user.getRole() == null) {
+            user.setRole("STUDENT");
+        }
+        if (user.getFullName() == null || user.getFullName().trim().isEmpty()) {
+            user.setFullName(user.getEmail().split("@")[0]);
+        }
+        
         repo.save(user);
         return ResponseEntity.ok("Registered Successfully");
     }
@@ -51,7 +58,15 @@ public class AuthController {
         if (existingUser.isPresent() &&
                 existingUser.get().getPassword().equals(user.getPassword())) {
 
-            return ResponseEntity.ok(Map.of("success", true));
+            User u = existingUser.get();
+            if (u.getRole() == null) {
+                u.setRole("STUDENT");
+                repo.save(u);
+            }
+            return ResponseEntity.ok(Map.of(
+                "success", true,
+                "user", u
+            ));
         }
 
         return ResponseEntity.ok(Map.of("success", false));
