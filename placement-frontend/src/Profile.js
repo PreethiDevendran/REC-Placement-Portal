@@ -285,7 +285,7 @@ function Profile() {
                                 border: "2px solid #ffffff",
                                 boxShadow: "0 4px 10px rgba(0,0,0,0.15)"
                             }}>
-                                📷
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                                 <input
                                     type="file"
                                     accept="image/*"
@@ -297,7 +297,7 @@ function Profile() {
                     </div>
 
                     <h3 style={{ margin: "0 0 5px 0", fontSize: "20px", fontWeight: "700" }}>{profile.fullName || "Student Profile"}</h3>
-                    <p style={{ margin: "0 0 20px 0", color: "#7f8c8d", fontSize: "14px" }}>🎓 {profile.dept || "Department Not Set"} | Year {profile.year || "N/A"}</p>
+                    <p style={{ margin: "0 0 20px 0", color: "#7f8c8d", fontSize: "14px" }}>{profile.dept || "Department Not Set"} | Year {profile.year || "N/A"}</p>
 
                     {/* ELIGIBILITY STATUS CARD */}
                     <div style={{
@@ -319,7 +319,13 @@ function Profile() {
                         </h4>
                         
                         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "15px" }}>
-                            <span style={{ fontSize: "22px" }}>{isEligible ? "🟩" : "🟥"}</span>
+                            <span style={{
+                                width: "12px",
+                                height: "12px",
+                                borderRadius: "50%",
+                                backgroundColor: isEligible ? "#2ecc71" : "#e74c3c",
+                                display: "inline-block"
+                            }} />
                             <span style={{ fontSize: "15px", fontWeight: "700", color: isEligible ? "#27ae60" : "#c0392b" }}>
                                 {isEligible ? "Eligible for Drives" : "Not Eligible"}
                             </span>
@@ -349,7 +355,7 @@ function Profile() {
                         <h3 style={{ margin: 0, fontSize: "20px", fontWeight: "800" }}>Profile Details</h3>
                         {!isEditing ? (
                             <button onClick={() => setIsEditing(true)} className="primary-btn" style={{ padding: "8px 20px", fontSize: "13px" }}>
-                                Edit Profile ✏️
+                                Edit Profile
                             </button>
                         ) : (
                             <div style={{ display: "flex", gap: "10px" }}>
@@ -357,7 +363,7 @@ function Profile() {
                                     Cancel
                                 </button>
                                 <button onClick={handleSave} className="accent-btn" style={{ padding: "8px 20px", fontSize: "13px" }}>
-                                    Save Changes 💾
+                                    Save Changes
                                 </button>
                             </div>
                         )}
@@ -365,7 +371,7 @@ function Profile() {
 
                     {/* SECTION 1: PERSONAL INFORMATION */}
                     <div style={{ marginBottom: "30px" }}>
-                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>📞 Personal Information</h4>
+                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>Personal Information</h4>
                         
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                             <div>
@@ -443,7 +449,7 @@ function Profile() {
 
                     {/* SECTION 2: ACADEMIC DETAILS */}
                     <div style={{ marginBottom: "30px", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
-                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>📝 Academic Information</h4>
+                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>Academic Information</h4>
                         
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
                             <div>
@@ -516,7 +522,7 @@ function Profile() {
                                 {profile.certifications.map((cert, index) => (
                                     <li key={index} style={{ marginBottom: "5px" }}>
                                         <div style={{ display: "flex", justifyContent: "space-between", maxWidth: "400px" }}>
-                                            <span>🥇 {cert}</span>
+                                            <span>{cert}</span>
                                             {isEditing && (
                                                 <button 
                                                     onClick={() => removeCert(index)}
@@ -549,7 +555,7 @@ function Profile() {
 
                     {/* SECTION 3: PLACEMENT PREPARATION (LINKS & RESUME) */}
                     <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
-                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>🚀 Placement Preparation</h4>
+                        <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>Placement Preparation</h4>
                         
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
                             <div>
@@ -603,13 +609,13 @@ function Profile() {
                                     <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                                         {profile.resume ? (
                                             <>
-                                                <span style={{ fontSize: "14px", color: "#27ae60", fontWeight: "600" }}>📄 Resume Uploaded</span>
+                                                <span style={{ fontSize: "14px", color: "#27ae60", fontWeight: "600" }}>Resume Uploaded</span>
                                                 <button onClick={downloadResume} className="primary-btn" style={{ padding: "6px 12px", fontSize: "12px", background: "#27ae60" }}>
-                                                    Download Resume ⬇️
+                                                    Download Resume
                                                 </button>
                                             </>
                                         ) : (
-                                            <span style={{ fontSize: "14px", color: "#e74c3c", fontWeight: "600" }}>❌ No resume uploaded. Edit profile to upload.</span>
+                                            <span style={{ fontSize: "14px", color: "#e74c3c", fontWeight: "600" }}>No resume uploaded. Edit profile to upload.</span>
                                         )}
                                     </div>
                                 )}

@@ -139,7 +139,7 @@ function ExperienceHub() {
                 
                 {isAuthorizedToShare && (
                     <button onClick={() => setShowForm(true)} className="primary-btn" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        Share Your Experience ✍️
+                        Share Your Experience
                     </button>
                 )}
             </div>
@@ -154,7 +154,7 @@ function ExperienceHub() {
             }}>
                 <input
                     type="text"
-                    placeholder="🔍 Search student name, preparation tips, keywords..."
+                    placeholder="Search student name, preparation tips, keywords..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="custom-input"
@@ -286,7 +286,7 @@ function ExperienceHub() {
                                     Cancel
                                 </button>
                                 <button type="submit" className="primary-btn">
-                                    Submit Review 🚀
+                                    Submit Review
                                 </button>
                             </div>
                         </form>
@@ -318,10 +318,10 @@ function ExperienceHub() {
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(0,0,0,0.05)", paddingBottom: "12px" }}>
                                         <div>
                                             <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "700", color: "#2c3e50" }}>
-                                                👤 {exp.studentName}
+                                                {exp.studentName}
                                             </h3>
                                             <span style={{ fontSize: "12px", color: "#7f8c8d" }}>
-                                                🎓 {exp.dept || "Student"} | Batch of {exp.year}
+                                                {exp.dept || "Student"} | Batch of {exp.year}
                                             </span>
                                         </div>
                                         <div style={{
@@ -332,7 +332,7 @@ function ExperienceHub() {
                                             fontWeight: "700",
                                             fontSize: "14px"
                                         }}>
-                                            🏢 {exp.companyName}
+                                            {exp.companyName}
                                         </div>
                                     </div>
 
@@ -402,7 +402,7 @@ function ExperienceHub() {
                                                 if(!isLiked) e.currentTarget.style.backgroundColor = "transparent";
                                             }}
                                         >
-                                            👍 {isLiked ? "Helpful!" : "Helpful?"} ({exp.likes ? exp.likes.length : 0})
+                                            {isLiked ? "Helpful" : "Mark as Helpful"} ({exp.likes ? exp.likes.length : 0})
                                         </button>
                                     </div>
 
@@ -411,7 +411,7 @@ function ExperienceHub() {
                         })
                     ) : (
                         <div className="glass-card" style={{ textAlign: "center", padding: "40px", color: "#7f8c8d" }}>
-                            🚫 No student experiences found matching your filters.
+                            No student experiences found matching your filters.
                         </div>
                     )}
                 </div>

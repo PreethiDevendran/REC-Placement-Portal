@@ -181,7 +181,7 @@ function CompanyUI() {
                     <div style={{ display: "flex", gap: "15px", marginBottom: "20px" }}>
                         <input
                             type="text"
-                            placeholder="🔍 Search company name..."
+                            placeholder="Search company name..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="custom-input"
@@ -254,14 +254,14 @@ function CompanyUI() {
                                         </div>
                                         <div style={{ flex: 1 }}>
                                             <h4 style={{ margin: "0 0 4px 0", fontSize: "16px", fontWeight: "700", color: "#2c3e50" }}>{c.name}</h4>
-                                            <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: "500" }}>📅 Visit Date: {c.date}</span>
+                                            <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: "500" }}>Visit Date: {c.date}</span>
                                         </div>
                                     </div>
                                 );
                             })
                         ) : (
                             <div style={{ textAlign: "center", padding: "40px 0", color: "#7f8c8d" }}>
-                                🚫 No matching companies found.
+                                No matching companies found.
                             </div>
                         )}
                     </div>
@@ -316,7 +316,7 @@ function CompanyUI() {
                         </div>
                     ) : (
                         <div style={{ color: "#7f8c8d" }}>
-                            👈 Select a company from the list to view placement count.
+                            Select a company from the list to view placement count.
                         </div>
                     )}
                 </div>
@@ -325,7 +325,7 @@ function CompanyUI() {
             {/* STATISTICS SECTION (BELOW SPIT LIST) */}
             <div className="glass-card" style={{ marginTop: "35px" }}>
                 <h3 style={{ fontSize: "20px", fontWeight: "800", marginBottom: "25px", borderBottom: "1px solid rgba(0,0,0,0.05)", paddingBottom: "15px" }}>
-                    📊 Placement Drive Summary & Analytics
+                    Placement Drive Summary & Analytics
                 </h3>
                 
                 <div style={{

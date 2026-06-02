@@ -144,7 +144,7 @@ function StudentExperience() {
                 </div>
                 <input
                     type="text"
-                    placeholder="🔍 Search discussions..."
+                    placeholder="Search discussions..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="custom-input"
@@ -193,7 +193,7 @@ function StudentExperience() {
 
             {/* ASK QUESTION CARD */}
             <div className="glass-card" style={{ marginBottom: "35px" }}>
-                <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "15px" }}>❓ Ask a New Question</h3>
+                <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "15px" }}>Ask a New Question</h3>
                 
                 <form onSubmit={handleAskQuestion} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
@@ -272,7 +272,7 @@ function StudentExperience() {
                                                 transition: "all 0.2s"
                                             }}
                                         >
-                                            🔺 Upvote ({q.upvotes ? q.upvotes.length : 0})
+                                            Upvote ({q.upvotes ? q.upvotes.length : 0})
                                         </button>
                                     </div>
 
@@ -311,14 +311,14 @@ function StudentExperience() {
                                                                 </span>
                                                                 
                                                                 {/* ROLES BADGES */}
-                                                                {isSeniorsReply && (
+                                                                 {isSeniorsReply && (
                                                                     <span style={{ fontSize: "10px", backgroundColor: "#f1c40f", color: "#1e272e", padding: "2px 8px", borderRadius: "10px", fontWeight: "700" }}>
-                                                                        🎓 Placed Senior
+                                                                        Placed Senior
                                                                     </span>
                                                                 )}
                                                                 {isAdminReply && (
                                                                     <span style={{ fontSize: "10px", backgroundColor: "#6a1b9a", color: "#ffffff", padding: "2px 8px", borderRadius: "10px", fontWeight: "700" }}>
-                                                                        💼 Admin / Coordinator
+                                                                        Admin / Coordinator
                                                                     </span>
                                                                 )}
                                                             </div>
@@ -345,7 +345,7 @@ function StudentExperience() {
                                                                     fontWeight: "600"
                                                                 }}
                                                             >
-                                                                ▲ Upvote Answer ({reply.upvotes ? reply.upvotes.length : 0})
+                                                                Upvote Answer ({reply.upvotes ? reply.upvotes.length : 0})
                                                             </button>
                                                         </div>
 
@@ -354,7 +354,7 @@ function StudentExperience() {
                                             })
                                         ) : (
                                             <div style={{ padding: "10px 0", color: "#7f8c8d", fontSize: "13px", fontStyle: "italic" }}>
-                                                💬 No replies posted yet. Be the first to share guidance!
+                                                No replies posted yet. Be the first to share guidance!
                                             </div>
                                         )}
                                     </div>
@@ -391,7 +391,7 @@ function StudentExperience() {
                         })
                     ) : (
                         <div className="glass-card" style={{ textAlign: "center", padding: "40px", color: "#7f8c8d" }}>
-                            🚫 No questions found in this category yet.
+                            No questions found in this category yet.
                         </div>
                     )}
                 </div>

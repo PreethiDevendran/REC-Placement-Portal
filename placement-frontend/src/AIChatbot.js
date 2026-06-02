@@ -4,7 +4,7 @@ function AIChatbot({ onClose }) {
     const [messages, setMessages] = useState([
         {
             sender: "bot",
-            text: "👋 Hello! I am your **REC Placement Assistant**.\n\nAsk me anything regarding placement drives, salary packages, eligibility criteria, student interview reviews, or general statistics!",
+            text: "Hello! I am your **REC Placement Assistant**.\n\nAsk me anything regarding placement drives, salary packages, eligibility criteria, student interview reviews, or general statistics!",
             time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
         }
     ]);
@@ -57,7 +57,7 @@ function AIChatbot({ onClose }) {
             console.error("Chatbot query failed:", err);
             setMessages(prev => [...prev, {
                 sender: "bot",
-                text: "⚠️ Server connection error. Please make sure the backend is active.",
+                text: "Server connection error. Please make sure the backend is active.",
                 time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
             }]);
         } finally {
@@ -116,7 +116,7 @@ function AIChatbot({ onClose }) {
                         justifyContent: "center",
                         fontSize: "20px"
                     }}>
-                        🤖
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div>
                         <h3 style={{ margin: 0, fontSize: "14px", color: "#ffffff", fontWeight: "700", letterSpacing: "0.2px" }}>REC Placement Bot</h3>

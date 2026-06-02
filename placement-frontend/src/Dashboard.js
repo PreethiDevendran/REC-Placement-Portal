@@ -102,19 +102,11 @@ function Dashboard() {
                 <div style={{ position: "absolute", width: "150px", height: "150px", background: "rgba(255,255,255,0.03)", borderRadius: "50%", right: "150px", bottom: "-50px" }} />
                 
                 <h2 style={{ color: "#ffffff", fontSize: "28px", fontWeight: "800", marginBottom: "8px" }}>
-                    REC Placement Hub 👋
+                    REC Placement Hub
                 </h2>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.85)", margin: 0, fontWeight: "500" }}>
                     Rajalakshmi Engineering College Transparency Portal. Prepare, track, and interact for a brighter future.
                 </p>
-                <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
-                    <button onClick={() => navigate("/chatbot")} className="accent-btn" style={{ fontSize: "13px", padding: "10px 20px" }}>
-                        Ask AI Chatbot 🤖
-                    </button>
-                    <button onClick={() => navigate("/experience")} className="primary-btn" style={{ fontSize: "13px", padding: "10px 20px", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
-                        Read Experiences 🗣️
-                    </button>
-                </div>
             </div>
 
             {/* ANALYTICS BOXES */}
@@ -125,10 +117,10 @@ function Dashboard() {
                 marginBottom: "35px"
             }}>
                 {[
-                    { title: "Companies Visited", value: stats.totalCompanies, icon: "🏢", color: "#8e24aa" },
-                    { title: "Students Placed", value: stats.placedStudents, icon: "🎓", color: "#6a1b9a" },
-                    { title: "Highest Package", value: `${stats.highestPackage} LPA`, icon: "🏆", color: "#f1c40f", isAccent: true },
-                    { title: "Average Package", value: `${stats.averagePackage.toFixed(1)} LPA`, icon: "📈", color: "#4facfe" }
+                    { title: "Companies Visited", value: stats.totalCompanies, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8e24aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M12 17h.01"/></svg>, color: "#8e24aa" },
+                    { title: "Students Placed", value: stats.placedStudents, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6a1b9a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>, color: "#6a1b9a" },
+                    { title: "Highest Package", value: `${stats.highestPackage} LPA`, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1c40f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>, color: "#f1c40f", isAccent: true },
+                    { title: "Average Package", value: `${stats.averagePackage.toFixed(1)} LPA`, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4facfe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>, color: "#4facfe" }
                 ].map((box, i) => (
                     <div key={i} className="glass-card" style={{
                         display: "flex",
@@ -154,8 +146,7 @@ function Dashboard() {
                             backgroundColor: box.isAccent ? "rgba(241,196,15,0.1)" : "rgba(106,27,154,0.06)",
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "24px"
+                            justifyContent: "center"
                         }}>
                             {box.icon}
                         </div>
@@ -173,7 +164,7 @@ function Dashboard() {
                 <div className="glass-card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     <div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-                            <h3 style={{ margin: 0, fontSize: "20px", fontWeight: "700" }}>🔥 Ongoing Placement Drives</h3>
+                            <h3 style={{ margin: 0, fontSize: "20px", fontWeight: "700" }}>Ongoing Placement Drives</h3>
                             <span style={{
                                 backgroundColor: "rgba(241, 196, 15, 0.2)",
                                 color: "#d4ac0d",
@@ -212,16 +203,16 @@ function Dashboard() {
                                     <h4 style={{ margin: "0 0 10px 0", fontSize: "22px", fontWeight: "700" }}>{ongoingDrive.name}</h4>
                                     
                                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", margin: "10px 0" }}>
-                                        <p style={{ margin: 0, fontSize: "14px" }}>💼 **Role:** {ongoingDrive.role}</p>
-                                        <p style={{ margin: 0, fontSize: "14px" }}>💵 **CTC:** {ongoingDrive.ctc}</p>
-                                        <p style={{ margin: 0, fontSize: "14px" }}>📋 **Eligibility:** {ongoingDrive.eligibility}</p>
-                                        <p style={{ margin: 0, fontSize: "14px" }}>📅 **Visit Date:** {ongoingDrive.date}</p>
+                                        <p style={{ margin: 0, fontSize: "14px" }}>Role: {ongoingDrive.role}</p>
+                                        <p style={{ margin: 0, fontSize: "14px" }}>CTC: {ongoingDrive.ctc}</p>
+                                        <p style={{ margin: 0, fontSize: "14px" }}>Eligibility: {ongoingDrive.eligibility}</p>
+                                        <p style={{ margin: 0, fontSize: "14px" }}>Visit Date: {ongoingDrive.date}</p>
                                     </div>
                                 </div>
                             </div>
                         ) : (
                             <div style={{ textAlign: "center", padding: "30px 0", color: "#7f8c8d" }}>
-                                🚫 No ongoing placement drives scheduled right now.
+                                No ongoing placement drives scheduled right now.
                             </div>
                         )}
                     </div>
@@ -235,7 +226,7 @@ function Dashboard() {
 
                 {/* ANNOUNCEMENTS PANEL */}
                 <div className="glass-card" style={{ display: "flex", flexDirection: "column" }}>
-                    <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>📢 Placement Notices</h3>
+                    <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>Placement Notices</h3>
                     
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px", flex: 1, overflowY: "auto", maxHeight: "260px" }}>
                         {notifications.length > 0 ? (
@@ -266,7 +257,7 @@ function Dashboard() {
 
             {/* PREVIOUS DRIVES SLIDER */}
             <div className="glass-card">
-                <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "25px" }}>💼 Previously Visited Corporates</h3>
+                <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "25px" }}>Previously Visited Corporates</h3>
                 
                 <div style={{
                     display: "flex",

@@ -16,7 +16,7 @@ public class PlacementPortalApplication {
     }
 
     @Bean
-    public CommandLineRunner seedDatabase(UserRepository userRepo, CompanyRepository companyRepo, PlacementStatisticsRepository statsRepo) {
+    public CommandLineRunner seedDatabase(UserRepository userRepo, CompanyRepository companyRepo, PlacementStatisticsRepository statsRepo, ExperienceRepository expRepo) {
         return args -> {
             // 1. Seed/Ensure default users exist
             // Ensure Admin
@@ -66,6 +66,18 @@ public class PlacementPortalApplication {
                 PlacementStatistics s3 = new PlacementStatistics(null, "2026", "ECE", "TCS", 75, 4.2, 3.6, 75);
                 statsRepo.saveAll(List.of(s1, s2, s3));
                 System.out.println("🌱 Pre-seeded default placement statistics");
+            }
+
+            // 4. Seed experiences (placed students) if empty
+            if (expRepo.count() == 0) {
+                Experience e1 = new Experience(null, "Google", "Rahul", "rahul@rajalakshmi.edu.in", "CSE", "2026", "Online round followed by 3 technical interviews.", "DSA and OOPs.", "Great experience.", new java.util.ArrayList<>());
+                Experience e2 = new Experience(null, "Accenture", "Priya", "priya@rajalakshmi.edu.in", "CSE", "2026", "Aptitude test then HR round.", "Practice aptitude.", "Simple rounds.", new java.util.ArrayList<>());
+                Experience e3 = new Experience(null, "TCS", "Karthik", "karthik@rajalakshmi.edu.in", "ECE", "2026", "Technical interview then HR.", "Prepare C++ and basic electronics.", "Learnt a lot.", new java.util.ArrayList<>());
+                Experience e4 = new Experience(null, "Google", "Preethi", "preethi@rajalakshmi.edu.in", "IT", "2026", "Online test and coding round.", "Prepare Leetcode Medium questions.", "Fabulous.", new java.util.ArrayList<>());
+                Experience e5 = new Experience(null, "CTS", "Amit", "amit@rajalakshmi.edu.in", "AIML", "2026", "Technical round.", "Prepare SQL.", "Good.", new java.util.ArrayList<>());
+                
+                expRepo.saveAll(List.of(e1, e2, e3, e4, e5));
+                System.out.println("🌱 Pre-seeded default student experiences");
             }
         };
     }

@@ -226,12 +226,12 @@ function AdminPanel() {
                 paddingBottom: "10px"
             }}>
                 {[
-                    { id: "companies", label: "🏢 Drive Companies", icon: "💼" },
-                    { id: "statistics", label: "📊 Placements Stats", icon: "📈" },
-                    { id: "experiences", label: "🗣️ Student Reviews", icon: "💬" },
-                    { id: "questions", label: "❓ Discussions Forum", icon: "🗣️" },
-                    { id: "users", label: "👤 Student Directory", icon: "👥" },
-                    { id: "notifications", label: "📢 Announcements", icon: "🔔" }
+                    { id: "companies", label: "Drive Companies", icon: "" },
+                    { id: "statistics", label: "Placements Stats", icon: "" },
+                    { id: "experiences", label: "Student Reviews", icon: "" },
+                    { id: "questions", label: "Discussions Forum", icon: "" },
+                    { id: "users", label: "Student Directory", icon: "" },
+                    { id: "notifications", label: "Announcements", icon: "" }
                 ].map(tab => (
                     <button
                         key={tab.id}
@@ -267,7 +267,7 @@ function AdminPanel() {
                         {/* Company Add Form */}
                         <div className="glass-card">
                             <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>
-                                {companyForm.id ? "✏️ Edit Company Details" : "➕ Add Drive Company"}
+                                {companyForm.id ? "Edit Company Details" : "Add Drive Company"}
                             </h3>
                             <form onSubmit={handleCompanySubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                                 <input type="text" placeholder="Company Name" value={companyForm.name} onChange={(e) => setCompanyForm({...companyForm, name: e.target.value})} className="custom-input" required />
@@ -321,7 +321,7 @@ function AdminPanel() {
                     <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "30px", alignItems: "start" }}>
                         <div className="glass-card">
                             <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>
-                                {statsForm.id ? "✏️ Edit Stats Record" : "➕ Add Placed Result"}
+                                {statsForm.id ? "Edit Stats Record" : "Add Placed Result"}
                             </h3>
                             <form onSubmit={handleStatsSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                                 <input type="text" placeholder="Company Name (e.g. TCS)" value={statsForm.companyName} onChange={(e) => setStatsForm({...statsForm, companyName: e.target.value})} className="custom-input" required />
@@ -413,7 +413,7 @@ function AdminPanel() {
                             {questions.map(q => (
                                 <div key={q.id} style={{ padding: "15px", border: "1px solid var(--border-light)", borderRadius: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                     <div>
-                                        <span style={{ fontWeight: "700", fontSize: "15px", color: "var(--primary-purple-dark)" }}>❓ {q.question}</span>
+                                        <span style={{ fontWeight: "700", fontSize: "15px", color: "var(--primary-purple-dark)" }}>{q.question}</span>
                                         <p style={{ margin: "4px 0 0 0", fontSize: "12px", color: "#7f8c8d" }}>Category: {q.category} | Replies: {q.replies ? q.replies.length : 0}</p>
                                     </div>
                                     <button onClick={() => handleDeleteQuestion(q.id)} className="primary-btn" style={{ padding: "6px 12px", fontSize: "12px", background: "#ef4444" }}>
@@ -481,7 +481,7 @@ function AdminPanel() {
                 {activeTab === "notifications" && (
                     <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "30px", alignItems: "start" }}>
                         <div className="glass-card">
-                            <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>➕ Post Dashboard Announcement</h3>
+                            <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px" }}>Post Dashboard Announcement</h3>
                             <form onSubmit={handleAnnouncementSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                                 <input type="text" placeholder="Title (e.g. TCS drive scheduled)" value={announcementForm.title} onChange={(e) => setAnnouncementForm({...announcementForm, title: e.target.value})} className="custom-input" required />
                                 <textarea placeholder="Message content..." value={announcementForm.message} onChange={(e) => setAnnouncementForm({...announcementForm, message: e.target.value})} className="custom-input" style={{ height: "100px", fontFamily: "inherit" }} required />
@@ -492,7 +492,7 @@ function AdminPanel() {
                                     <option value="DISCUSSION">Discussion Alert</option>
                                 </select>
 
-                                <button type="submit" className="primary-btn" style={{ marginTop: "10px" }}>Post Announcement 📢</button>
+                                <button type="submit" className="primary-btn" style={{ marginTop: "10px" }}>Post Announcement</button>
                             </form>
                         </div>
 

@@ -56,11 +56,11 @@ function Layout() {
 
     // Sidebar items (Profile and Chatbot removed as standalone menu items)
     const menuItems = [
-        { name: "Dashboard", path: "/dashboard", icon: "📊" },
-        { name: "Companies Visited", path: "/companies", icon: "🏢" },
-        { name: "Placement Stats", path: "/statistics", icon: "📈" },
-        { name: "Experience Hub", path: "/experience", icon: "🗣️" },
-        { name: "Discussion Forum", path: "/discussions", icon: "💬" },
+        { name: "Dashboard", path: "/dashboard", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> },
+        { name: "Companies Visited", path: "/companies", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M12 17h.01"/></svg> },
+        { name: "Placement Stats", path: "/statistics", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg> },
+        { name: "Experience Hub", path: "/experience", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
+        { name: "Discussion Forum", path: "/discussions", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 6.1H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-10a2 2 0 0 0-2-2z"/><path d="M23 2.1H9a2 2 0 0 0-2 2v2h10a4 4 0 0 1 4 4v6h2a2 2 0 0 0 2-2v-10a2 2 0 0 0-2-2z"/></svg> },
     ];
 
     // Admin dashboard link
@@ -194,7 +194,9 @@ function Layout() {
                                     }
                                 }}
                             >
-                                <span style={{ fontSize: "18px" }}>⚙️</span>
+                                <span style={{ fontSize: "18px", display: "flex", alignItems: "center" }}>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                </span>
                                 <span>Admin Panel</span>
                             </button>
                         </div>
@@ -354,7 +356,7 @@ function Layout() {
                                 e.currentTarget.style.backgroundColor = "transparent";
                             }}
                         >
-                            Logout 🚪
+                            Logout
                         </button>
                     </div>
                 </header>
@@ -407,7 +409,11 @@ function Layout() {
                     onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.08)"}
                     onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                 >
-                    {chatOpen ? "✕" : "🤖"}
+                    {chatOpen ? (
+                        <span style={{ fontSize: "20px", fontWeight: "bold" }}>✕</span>
+                    ) : (
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    )}
                 </button>
             </div>
 
