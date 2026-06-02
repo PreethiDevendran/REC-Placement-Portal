@@ -56,17 +56,19 @@ function Layout() {
         navigate("/");
     };
 
+    const isAdmin = currentRole === "ADMIN";
+    
     // Sidebar items (Profile and Chatbot removed as standalone menu items)
-    const menuItems = [
+    const menuItems = isAdmin ? [
+        { name: "Admin Dashboard", path: "/admin", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> },
+        { name: "Settings / Profile", path: "/profile", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> }
+    ] : [
         { name: "Dashboard", path: "/dashboard", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> },
         { name: "Companies Visited", path: "/companies", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M12 17h.01"/></svg> },
         { name: "Placement Stats", path: "/statistics", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg> },
         { name: "Experience Hub", path: "/experience", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
         { name: "Discussion Forum", path: "/discussions", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 6.1H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-10a2 2 0 0 0-2-2z"/><path d="M23 2.1H9a2 2 0 0 0-2 2v2h10a4 4 0 0 1 4 4v6h2a2 2 0 0 0 2-2v-10a2 2 0 0 0-2-2z"/></svg> },
     ];
-
-    // Admin dashboard link
-    const showAdmin = currentRole === "ADMIN";
 
     return (
         <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#fbfbfc" }}>
@@ -160,49 +162,7 @@ function Layout() {
                         );
                     })}
 
-                    {/* ADMIN MENU (IF AUTHORIZED) */}
-                    {showAdmin && (
-                        <div style={{ marginTop: "15px", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "15px" }}>
-                            <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", paddingLeft: "16px", textTransform: "uppercase", fontWeight: "700" }}>Admin</span>
-                            <button
-                                onClick={() => navigate("/admin")}
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "14px",
-                                    width: "100%",
-                                    padding: "12px 16px",
-                                    marginTop: "6px",
-                                    borderRadius: "12px",
-                                    border: "none",
-                                    background: location.pathname === "/admin" ? "rgba(255, 255, 255, 0.2)" : "transparent",
-                                    color: location.pathname === "/admin" ? "#ffffff" : "rgba(255, 255, 255, 0.75)",
-                                    cursor: "pointer",
-                                    fontSize: "14px",
-                                    fontWeight: "600",
-                                    textAlign: "left",
-                                    transition: "all 0.2s ease"
-                                }}
-                                onMouseEnter={(e) => {
-                                    if(location.pathname !== "/admin") {
-                                        e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-                                        e.currentTarget.style.color = "#ffffff";
-                                    }
-                                }}
-                                onMouseLeave={(e) => {
-                                    if(location.pathname !== "/admin") {
-                                        e.currentTarget.style.background = "transparent";
-                                        e.currentTarget.style.color = "rgba(255,255,255,0.75)";
-                                    }
-                                }}
-                            >
-                                <span style={{ fontSize: "18px", display: "flex", alignItems: "center" }}>
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                                </span>
-                                <span>Admin Panel</span>
-                            </button>
-                        </div>
-                    )}
+
                 </div>
 
                 {/* USER PROFILE INFO IN SIDEBAR (CLICKABLE: OPENS PROFILE PAGE) */}
@@ -370,55 +330,56 @@ function Layout() {
             </div>
 
             {/* FLOATING PERSISTENT AI CHATBOT WIDGET */}
-            <div style={{
-                position: "fixed",
-                bottom: "35px",
-                right: "35px",
-                zIndex: 1000,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-end"
-            }}>
-                {chatOpen && (
-                    <div style={{
-                        width: "360px",
-                        height: "500px",
-                        marginBottom: "15px",
-                        animation: "fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-                    }}>
-                        <AIChatbot onClose={() => setChatOpen(false)} />
-                    </div>
-                )}
-                
-                <button
-                    onClick={() => setChatOpen(!chatOpen)}
-                    style={{
-                        width: "56px",
-                        height: "56px",
-                        borderRadius: "50%",
-                        background: "linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark))",
-                        color: "#ffffff",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "26px",
-                        border: "none",
-                        boxShadow: "0 6px 20px rgba(149, 117, 205, 0.3)",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        outline: "none"
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.08)"}
-                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-                >
-                    {chatOpen ? (
-                        <span style={{ fontSize: "20px", fontWeight: "bold" }}>✕</span>
-                    ) : (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            {!isAdmin && (
+                <div style={{
+                    position: "fixed",
+                    bottom: "65px",
+                    right: "45px",
+                    zIndex: 1000,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end"
+                }}>
+                    {chatOpen && (
+                        <div style={{
+                            width: "360px",
+                            height: "500px",
+                            marginBottom: "15px",
+                            animation: "fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                        }}>
+                            <AIChatbot onClose={() => setChatOpen(false)} />
+                        </div>
                     )}
-                </button>
-            </div>
-
+                    
+                    <button
+                        onClick={() => setChatOpen(!chatOpen)}
+                        style={{
+                            width: "56px",
+                            height: "56px",
+                            borderRadius: "50%",
+                            background: "linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark))",
+                            color: "#ffffff",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "26px",
+                            border: "none",
+                            boxShadow: "0 6px 20px rgba(149, 117, 205, 0.3)",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease",
+                            outline: "none"
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.08)"}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                    >
+                        {chatOpen ? (
+                            <span style={{ fontSize: "20px", fontWeight: "bold" }}>✕</span>
+                        ) : (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        )}
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

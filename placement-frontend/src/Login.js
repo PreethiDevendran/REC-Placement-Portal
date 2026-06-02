@@ -6,6 +6,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loginType, setLoginType] = useState("student"); // "student" or "admin"
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -31,7 +32,13 @@ function Login() {
         .then(res => res.json())
         .then(data => {
             if (data.success && data.user) {
-                // ✅ Store user info
+                // Lock admin portal login to ADMIN accounts only
+                if (loginType === "admin" && data.user.role !== "ADMIN") {
+                    setError("❌ Access Denied: Not an Admin account");
+                    return;
+                }
+
+                // Store user info
                 localStorage.setItem("email", data.user.email);
                 localStorage.setItem("fullName", data.user.fullName || data.user.email.split("@")[0]);
                 localStorage.setItem("dept", data.user.dept || "");
@@ -39,7 +46,12 @@ function Login() {
                 localStorage.setItem("role", data.user.role || "STUDENT");
                 localStorage.setItem("profilePic", data.user.profilePic || "");
 
-                navigate("/dashboard");
+                // Redirect based on role
+                if (data.user.role === "ADMIN") {
+                    navigate("/admin");
+                } else {
+                    navigate("/dashboard");
+                }
             } else {
                 setError("❌ Invalid credentials");
             }
@@ -48,6 +60,8 @@ function Login() {
             setError("⚠️ Server connection error. Please start backend.");
         });
     };
+
+    const isFormValid = email.trim() !== "" && password.trim() !== "";
 
     return (
         <div style={{
@@ -65,7 +79,7 @@ function Login() {
                 padding: "40px 30px",
                 boxShadow: "0 15px 35px rgba(0,0,0,0.2)"
             }}>
-                <div style={{ textAlign: "center", marginBottom: "35px" }}>
+                <div style={{ textAlign: "center", marginBottom: "25px" }}>
                     <div style={{
                         width: "60px",
                         height: "60px",
@@ -86,13 +100,59 @@ function Login() {
                     <p style={{ color: "#7f8c8d", fontSize: "14px", margin: 0 }}>Log in to access your placement dashboard</p>
                 </div>
 
+                {/* LOGIN TYPE TABS */}
+                <div style={{
+                    display: "flex",
+                    borderRadius: "10px",
+                    background: "rgba(106, 27, 154, 0.05)",
+                    padding: "4px",
+                    marginBottom: "25px"
+                }}>
+                    <button
+                        onClick={() => { setLoginType("student"); setError(""); }}
+                        style={{
+                            flex: 1,
+                            padding: "10px",
+                            border: "none",
+                            borderRadius: "8px",
+                            background: loginType === "student" ? "#4a148c" : "transparent",
+                            color: loginType === "student" ? "#ffffff" : "#7f8c8d",
+                            fontWeight: "700",
+                            fontSize: "13px",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease"
+                        }}
+                    >
+                        Student Portal
+                    </button>
+                    <button
+                        onClick={() => { setLoginType("admin"); setError(""); }}
+                        style={{
+                            flex: 1,
+                            padding: "10px",
+                            border: "none",
+                            borderRadius: "8px",
+                            background: loginType === "admin" ? "#4a148c" : "transparent",
+                            color: loginType === "admin" ? "#ffffff" : "#7f8c8d",
+                            fontWeight: "700",
+                            fontSize: "13px",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease"
+                        }}
+                    >
+                        Admin Portal
+                    </button>
+                </div>
+
                 <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     {/* EMAIL */}
                     <div>
-                        <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>College Email</label>
+                        <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>
+                            {loginType === "admin" ? "Admin Email" : "College Email"}
+                        </label>
                         <input
                             type="email"
-                            placeholder="username@rajalakshmi.edu.in"
+                            placeholder={loginType === "admin" ? "admin@rajalakshmi.edu.in" : "username@rajalakshmi.edu.in"}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="custom-input"
@@ -121,28 +181,37 @@ function Login() {
                     {/* LOGIN BUTTON */}
                     <button
                         onClick={handleLogin}
+                        disabled={!isFormValid}
                         className="primary-btn"
-                        style={{ width: "100%", padding: "14px" }}
+                        style={{
+                            width: "100%",
+                            padding: "14px",
+                            opacity: isFormValid ? 1 : 0.5,
+                            cursor: isFormValid ? "pointer" : "not-allowed",
+                            transition: "all 0.2s ease"
+                        }}
                     >
                         Sign In
                     </button>
 
-                    <div style={{ textAlign: "center", marginTop: "10px" }}>
-                        <span style={{ fontSize: "13px", color: "#7f8c8d" }}>New user? </span>
-                        <button
-                            onClick={() => navigate("/register")}
-                            style={{
-                                border: "none",
-                                background: "none",
-                                color: "#6a1b9a",
-                                fontWeight: "700",
-                                cursor: "pointer",
-                                fontSize: "13px"
-                            }}
-                        >
-                            Create Account
-                        </button>
-                    </div>
+                    {loginType === "student" && (
+                        <div style={{ textAlign: "center", marginTop: "10px" }}>
+                            <span style={{ fontSize: "13px", color: "#7f8c8d" }}>New user? </span>
+                            <button
+                                onClick={() => navigate("/register")}
+                                style={{
+                                    border: "none",
+                                    background: "none",
+                                    color: "#6a1b9a",
+                                    fontWeight: "700",
+                                    cursor: "pointer",
+                                    fontSize: "13px"
+                                }}
+                            >
+                                Create Account
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

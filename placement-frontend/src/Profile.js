@@ -177,10 +177,6 @@ function Profile() {
         });
     };
 
-    // Calculate Eligibility Status
-    const isCgpaEligible = profile.cgpa >= 6.0;
-    const isBacklogEligible = profile.backlogs === 0;
-    const isEligible = isCgpaEligible && isBacklogEligible;
 
     // Helper to download resume base64
     const downloadResume = () => {
@@ -302,55 +298,8 @@ function Profile() {
                     <h3 style={{ margin: "0 0 5px 0", fontSize: "20px", fontWeight: "700" }}>{profile.fullName || "Student Profile"}</h3>
                     <p style={{ margin: "0 0 20px 0", color: "#7f8c8d", fontSize: "14px" }}>{profile.dept || "Department Not Set"} | Year {profile.year || "N/A"}</p>
 
-                    {/* ELIGIBILITY STATUS CARD */}
-                    <div style={{
-                        marginTop: "25px",
-                        padding: "20px",
-                        borderRadius: "15px",
-                        backgroundColor: isEligible ? "rgba(46, 204, 113, 0.1)" : "rgba(231, 76, 60, 0.1)",
-                        border: `1px solid ${isEligible ? "rgba(46, 204, 113, 0.2)" : "rgba(231, 76, 60, 0.2)"}`,
-                        textAlign: "left"
-                    }}>
-                        <h4 style={{
-                            margin: "0 0 10px 0",
-                            fontSize: "14px",
-                            fontWeight: "700",
-                            color: isEligible ? "#27ae60" : "#c0392b",
-                            textTransform: "uppercase"
-                        }}>
-                            Drive Eligibility
-                        </h4>
-                        
-                        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "15px" }}>
-                            <span style={{
-                                width: "12px",
-                                height: "12px",
-                                borderRadius: "50%",
-                                backgroundColor: isEligible ? "#2ecc71" : "#e74c3c",
-                                display: "inline-block"
-                            }} />
-                            <span style={{ fontSize: "15px", fontWeight: "700", color: isEligible ? "#27ae60" : "#c0392b" }}>
-                                {isEligible ? "Eligible for Drives" : "Not Eligible"}
-                            </span>
-                        </div>
-
-                        {/* Verification Criteria */}
-                        <div style={{ fontSize: "13px", display: "flex", flexDirection: "column", gap: "8px" }}>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <span style={{ color: "#7f8c8d" }}>CGPA Limit (>= 6.0):</span>
-                                <span style={{ fontWeight: "700", color: isCgpaEligible ? "#2ecc71" : "#e74c3c" }}>
-                                    {profile.cgpa.toFixed(2)} {isCgpaEligible ? "✓" : "✗"}
-                                </span>
-                            </div>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <span style={{ color: "#7f8c8d" }}>Active Backlogs (= 0):</span>
-                                <span style={{ fontWeight: "700", color: isBacklogEligible ? "#2ecc71" : "#e74c3c" }}>
-                                    {profile.backlogs} {isBacklogEligible ? "✓" : "✗"}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
 
                 {/* RIGHT CARD - DETAILED PROFILE TABS */}
                 <div className="glass-card">
@@ -454,34 +403,7 @@ function Profile() {
                     <div style={{ marginBottom: "30px", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
                         <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>Academic Information</h4>
                         
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
-                            <div>
-                                <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>Current CGPA</label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    name="cgpa"
-                                    value={profile.cgpa}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    className="custom-input"
-                                    min="0"
-                                    max="10"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>Active Backlogs</label>
-                                <input
-                                    type="number"
-                                    name="backlogs"
-                                    value={profile.backlogs}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    className="custom-input"
-                                    min="0"
-                                />
-                            </div>
-                        </div>
+
 
                         {/* SKILLS TAGS */}
                         <div style={{ marginBottom: "15px" }}>
@@ -560,44 +482,9 @@ function Profile() {
                     <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
                         <h4 style={{ fontSize: "16px", fontWeight: "700", color: "#6a1b9a", marginBottom: "15px" }}>Placement Preparation</h4>
                         
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
-                            <div>
-                                <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>LinkedIn Profile Link</label>
-                                <input
-                                    type="url"
-                                    name="linkedinUrl"
-                                    value={profile.linkedinUrl}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    placeholder="https://linkedin.com/in/username"
-                                    className="custom-input"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>GitHub Profile Link</label>
-                                <input
-                                    type="url"
-                                    name="githubUrl"
-                                    value={profile.githubUrl}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    placeholder="https://github.com/username"
-                                    className="custom-input"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>LeetCode Profile Link</label>
-                                <input
-                                    type="url"
-                                    name="leetcodeUrl"
-                                    value={profile.leetcodeUrl}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    placeholder="https://leetcode.com/username"
-                                    className="custom-input"
-                                />
-                            </div>
+
                             
+                        <div style={{ display: "flex", flexDirection: "column", gap: "20px", marginBottom: "20px" }}>
                             {/* RESUME UPLOAD SECTION */}
                             <div>
                                 <label style={{ fontSize: "13px", fontWeight: "600", color: "#7f8c8d", display: "block", marginBottom: "6px" }}>Resume (PDF Format)</label>
